@@ -39,13 +39,17 @@ namespace IzsekovanjeRondelicLib
             this.RRond = rRond;
         }
 
-        public bool SeDotika(OkroglaRondelica rond)
+        public bool SeDotika(OkroglaRondelica rond, double zamik = 0)
         {
-            return false;
-        }
-        
-    }
+            double xRazlika = (rond.XPos - this.XPos) * (rond.XPos - this.XPos);
+            double yRazlika = (rond.YPos - this.YPos) * (rond.YPos - this.YPos);
+            double rRazlika = (rond.RRond + zamik + this.RRond) * (rond.RRond + zamik + this.RRond);
 
+            return xRazlika + yRazlika < rRazlika;
+        }
+
+    }
+    
     public class IzsekovanjeRondelic
     {
         /// <summary>
@@ -56,7 +60,7 @@ namespace IzsekovanjeRondelicLib
         /// <param name="sirinaTraku">Sirina traku podana v milimetrih</param>
         /// <param name="dolzinaTraku">Dolzina traku podana v milimetrih</param>
         /// <returns></returns>
-        private bool PrviTest(double polmer, double razMedStran, double sirinaTraku, double dolzinaTraku)
+        private static bool PrviTest(double polmer, double razMedStran, double sirinaTraku, double dolzinaTraku)
         {
             // Začetno preverjanje, da niso vhodni podatki napačni
             double prviTest = 2 * polmer + 2 * razMedStran; // Premer vključno z razdaljo med rondelico in stranico na vsaki strani
@@ -67,8 +71,10 @@ namespace IzsekovanjeRondelicLib
                 return true;
         }
 
-        private bool PostaviRondelico(List<OkroglaRondelica> ret, ref OkroglaRondelica rond, double sirinaTraku, double dolzinaTraku, double razMedSos, double razMedStran, ref bool gorAliDol)
+        private static bool PostaviRondelico(List<OkroglaRondelica> ret, ref OkroglaRondelica rond, double sirinaTraku, double dolzinaTraku, double razMedSos, double razMedStran, ref bool gorAliDol)
         {
+
+            // Rondelico postavimo po Y - osi
             if(gorAliDol) // true - gremo visje, false - gremo nizje
             {
                 rond.YPos += 2 * rond.RRond + razMedSos;
@@ -94,7 +100,22 @@ namespace IzsekovanjeRondelicLib
                 else
                     return true;
             }
-            return true;
+
+            // Rondelico postavimo po X - osi
+
+            OkroglaRondelica last = ret[ret.Count - 1];
+
+            while (rond.SeDotika(last, razMedSos))
+                rond.XPos++;
+
+
+            // Preverimo se, da nismo ze cez rob traku po dolzini
+            double desnaMeja = rond.XPos + rond.RRond + razMedStran;
+
+            if (desnaMeja > dolzinaTraku)
+                return false;
+            else
+                return true;
         }
 
         /// <param name="dolzinaTraku">Dolzina traku podana v milimetrih</param>
@@ -102,7 +123,7 @@ namespace IzsekovanjeRondelicLib
         /// <param name="polmer">Polmer rondelice podan v milimetrih</param>
         /// <param name="razMedSos">Razdalja med sosednjima rondelicama, podana v milimetrih</param>
         /// <param name="razMedStran">Razdalja med rondelico in robom traku, podana v milimetrih</param>
-        public List<OkroglaRondelica> Izracunaj(double dolzinaTraku, double sirinaTraku, double polmer, double razMedSos, double razMedStran)
+        public static List<OkroglaRondelica> Izracunaj(double dolzinaTraku, double sirinaTraku, double polmer, double razMedSos, double razMedStran)
         {
             List<OkroglaRondelica> ret = new List<OkroglaRondelica>();
 
@@ -120,6 +141,12 @@ namespace IzsekovanjeRondelicLib
             {
                 rond = new OkroglaRondelica(x, y, polmer);
                 postavljena = PostaviRondelico(ret, ref rond, sirinaTraku, dolzinaTraku,razMedSos, razMedStran,ref gorAliDol);
+                if (postavljena)
+                {
+                    x = rond.XPos;
+                    y = rond.YPos;
+                    ret.Add(rond);
+                }
             } while (postavljena);
 
             return ret;
