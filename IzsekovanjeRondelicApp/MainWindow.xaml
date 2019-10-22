@@ -5,14 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IzsekovanjeRondelicApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="285.26" Width="467.341">
     <Grid>
-        <TextBox x:Name="TbDolzinaTraku" HorizontalAlignment="Left" Height="23" Margin="81,54,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="TbSirinaTraku" HorizontalAlignment="Left" Height="23" Margin="81,82,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="TbRRond" HorizontalAlignment="Left" Height="23" Margin="81,110,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="TbRazMedSos" HorizontalAlignment="Left" Height="23" Margin="81,138,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="TbRazMedStran" HorizontalAlignment="Left" Height="23" Margin="81,166,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="BtnIzracunajStevilo" Content="Izracunaj Stevilo" HorizontalAlignment="Left" Margin="81,194,0,0" VerticalAlignment="Top" Width="120" Click="BtnIzracunajStevilo_Click"/>
+        <TextBox x:Name="TbDolzinaTraku" HorizontalAlignment="Left" Height="23" Margin="295,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TbSirinaTraku" HorizontalAlignment="Left" Height="23" Margin="295,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TbRRond" HorizontalAlignment="Left" Height="23" Margin="295,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TbRazMedSos" HorizontalAlignment="Left" Height="23" Margin="295,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TbRazMedStran" HorizontalAlignment="Left" Height="23" Margin="295,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="BtnIzracunajStevilo" Content="Izračunaj Število" HorizontalAlignment="Left" Margin="160,185,0,0" VerticalAlignment="Top" Width="120" Click="BtnIzracunajStevilo_Click"/>
+        <Button x:Name="BtnPrikaziTrak" Content="Prikaži Trak" HorizontalAlignment="Left" Margin="295,185,0,0" VerticalAlignment="Top" Width="120" Click="BtnPrikaziTrak_Click" IsDefault="True"/>
+        <Label x:Name="label" Content="Dolžina traku (mm)" HorizontalAlignment="Left" Margin="179,42,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy" Content="Širina traku (mm)" HorizontalAlignment="Left" Margin="189,70,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy1" Content="Polmer rondelice (mm)" HorizontalAlignment="Left" Margin="160,98,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy2" Content="Razdalja med sosednjima rondelicama (mm)" HorizontalAlignment="Left" Margin="47,126,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy3" Content="Razdalja med rondelico in robom traku (mm)" HorizontalAlignment="Left" Margin="43,154,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

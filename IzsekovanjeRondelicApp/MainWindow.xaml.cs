@@ -24,18 +24,56 @@ namespace IzsekovanjeRondelicApp
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
+        }
+
+        public List<OkroglaRondelica> Seznam
+        {
+            get;
+            set;
         }
 
         private void BtnIzracunajStevilo_Click(object sender, RoutedEventArgs e)
         {
-            var seznam = IzsekovanjeRondelic.Izracunaj(double.Parse(TbDolzinaTraku.Text), double.Parse(TbSirinaTraku.Text), double.Parse(TbRRond.Text), double.Parse(TbRazMedSos.Text), double.Parse(TbRazMedStran.Text));
-            /*String izpis = "Seznam rondelic:\n";
-            foreach (OkroglaRondelica rond in seznam)
+            double dolzinaTraku, sirinaTraku, polmerRond, razMedSos, razMedStran;
+            if (!double.TryParse(TbDolzinaTraku.Text, out dolzinaTraku)
+                || !double.TryParse(TbSirinaTraku.Text, out sirinaTraku)
+                || !double.TryParse(TbRRond.Text, out polmerRond)
+                || !double.TryParse(TbRazMedSos.Text, out razMedSos)
+                || !double.TryParse(TbRazMedStran.Text, out razMedStran))
             {
-                izpis += "X: " + rond.XPos + ", Y: " + rond.YPos + "\n";
+                MessageBox.Show("Preveri vhodne podatke");
             }
-            MessageBox.Show(izpis);*/
-            MessageBox.Show("St. rondelic: " + seznam.Count.ToString());
+            else
+            {
+                Seznam = IzsekovanjeRondelic.Izracunaj(dolzinaTraku,sirinaTraku,polmerRond,razMedSos, razMedStran);
+                /*String izpis = "Seznam rondelic:\n";
+                foreach (OkroglaRondelica rond in seznam)
+                {
+                    izpis += "X: " + rond.XPos + ", Y: " + rond.YPos + "\n";
+                }
+                MessageBox.Show(izpis);*/
+                MessageBox.Show("St. rondelic: " + Seznam.Count.ToString());
+            }
+        }
+
+        private void BtnPrikaziTrak_Click(object sender, RoutedEventArgs e)
+        {
+            double dolzinaTraku, sirinaTraku, polmerRond, razMedSos, razMedStran;
+            if (!double.TryParse(TbDolzinaTraku.Text, out dolzinaTraku)
+                || !double.TryParse(TbSirinaTraku.Text, out sirinaTraku)
+                || !double.TryParse(TbRRond.Text, out polmerRond)
+                || !double.TryParse(TbRazMedSos.Text, out razMedSos)
+                || !double.TryParse(TbRazMedStran.Text, out razMedStran))
+            {
+                MessageBox.Show("Preveri vhodne podatke");
+            }
+            else
+            {
+                Seznam = IzsekovanjeRondelic.Izracunaj(dolzinaTraku, sirinaTraku, polmerRond, razMedSos, razMedStran);
+                PrikazTraku prikazTraku = new PrikazTraku(Seznam, dolzinaTraku, sirinaTraku);
+                prikazTraku.Show();
+            }
         }
     }
 }
