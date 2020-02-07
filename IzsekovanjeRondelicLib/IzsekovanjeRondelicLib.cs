@@ -103,11 +103,12 @@ namespace IzsekovanjeRondelicLib
 
             // Rondelico postavimo po X - osi
 
-            OkroglaRondelica last = ret[ret.Count - 1];
-
-            while (rond.SeDotika(last, razMedSos))
-                rond.XPos++;
-
+            //OkroglaRondelica last = ret[ret.Count - 1];
+            foreach (OkroglaRondelica last in ret)
+            {
+                while (rond.SeDotika(last, razMedSos))
+                    rond.XPos++;
+            }
 
             // Preverimo se, da nismo ze cez rob traku po dolzini
             double desnaMeja = rond.XPos + rond.RRond + razMedStran;
@@ -140,7 +141,7 @@ namespace IzsekovanjeRondelicLib
             do
             {
                 rond = new OkroglaRondelica(x, y, polmer);
-                postavljena = PostaviRondelico(ret, ref rond, sirinaTraku, dolzinaTraku,razMedSos, razMedStran,ref gorAliDol);
+                postavljena = PostaviRondelico(ret, ref rond, sirinaTraku, dolzinaTraku, razMedSos, razMedStran, ref gorAliDol);
                 if (postavljena)
                 {
                     x = rond.XPos;
