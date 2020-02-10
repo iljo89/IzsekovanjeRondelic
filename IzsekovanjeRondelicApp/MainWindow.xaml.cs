@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -75,5 +77,35 @@ namespace IzsekovanjeRondelicApp
                 prikazTraku.Show();
             }
         }
+
+        private void btnConnectToRest_Click(object sender, RoutedEventArgs e)
+        {
+            double dolzinaTraku, sirinaTraku, polmerRond, razMedSos, razMedStran;
+            if (!double.TryParse(TbDolzinaTraku.Text, out dolzinaTraku)
+                || !double.TryParse(TbSirinaTraku.Text, out sirinaTraku)
+                || !double.TryParse(TbRRond.Text, out polmerRond)
+                || !double.TryParse(TbRazMedSos.Text, out razMedSos)
+                || !double.TryParse(TbRazMedStran.Text, out razMedStran))
+            {
+                MessageBox.Show("Preveri vhodne podatke");
+            }
+
+            else
+            {
+                
+            }
+        }
+
+       /* private void restApiAddress_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if(restApiAddress.Text == "naslov:port")
+            restApiAddress.Text = "";
+        }
+
+        private void restApiAddress_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (restApiAddress.Text == "")
+                restApiAddress.Text = "naslov:port";
+        }*/
     }
 }

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SimpleRESTReader": {
+      "commandName": "Project",
+      "commandLineArgs": "40 5 2 1 1"
+    }
+  }
+}
